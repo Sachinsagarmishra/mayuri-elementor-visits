@@ -649,6 +649,7 @@ final class Services_Grid_Widget extends Widget_Base {
 
 			echo '<div class="mev-card-content">';
 
+			echo '<div class="mev-card-text-wrap">';
 			if ( $is_large ) {
 				$this->render_icon( $card );
 				$this->render_title( $title_tag, $card );
@@ -660,6 +661,8 @@ final class Services_Grid_Widget extends Widget_Base {
 			}
 
 			$this->render_description( $card );
+			echo '</div>';
+
 			$this->render_button( $card );
 
 			echo '</div>';
