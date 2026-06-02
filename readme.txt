@@ -4,7 +4,7 @@ Tags: elementor, widgets, services, grid
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.0
 License: GPLv2 or later
 
 Adds unique editable Elementor visit widgets for Mayuri sections.
@@ -21,10 +21,6 @@ Mayuri Elementor Visits adds a custom Elementor category named Mayuri Visits and
 4. Edit a page with Elementor and search for Services Grid Visit.
 
 == Changelog ==
-
-= 1.0.1 =
-* Fixed loading order and namespace constraints for broad compatibility.
-* Added deploy workflows.
 
 = 1.0.0 =
 Initial release.
