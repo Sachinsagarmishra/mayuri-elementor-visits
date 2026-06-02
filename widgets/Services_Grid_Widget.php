@@ -136,6 +136,80 @@ final class Services_Grid_Widget extends Widget_Base {
 		);
 
 		$repeater->add_control(
+			'background_position',
+			[
+				'label'   => esc_html__( 'Position', 'mayuri-elementor-visits' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'center center',
+				'options' => [
+					'center center' => esc_html__( 'Center Center', 'mayuri-elementor-visits' ),
+					'center left'   => esc_html__( 'Center Left', 'mayuri-elementor-visits' ),
+					'center right'  => esc_html__( 'Center Right', 'mayuri-elementor-visits' ),
+					'top center'    => esc_html__( 'Top Center', 'mayuri-elementor-visits' ),
+					'top left'      => esc_html__( 'Top Left', 'mayuri-elementor-visits' ),
+					'top right'     => esc_html__( 'Top Right', 'mayuri-elementor-visits' ),
+					'bottom center' => esc_html__( 'Bottom Center', 'mayuri-elementor-visits' ),
+					'bottom left'   => esc_html__( 'Bottom Left', 'mayuri-elementor-visits' ),
+					'bottom right'  => esc_html__( 'Bottom Right', 'mayuri-elementor-visits' ),
+				],
+				'condition' => [
+					'background_image[url]!' => '',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'background_attachment',
+			[
+				'label'   => esc_html__( 'Attachment', 'mayuri-elementor-visits' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'scroll',
+				'options' => [
+					'scroll' => esc_html__( 'Scroll', 'mayuri-elementor-visits' ),
+					'fixed'  => esc_html__( 'Fixed', 'mayuri-elementor-visits' ),
+				],
+				'condition' => [
+					'background_image[url]!' => '',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'background_repeat',
+			[
+				'label'   => esc_html__( 'Repeat', 'mayuri-elementor-visits' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'no-repeat',
+				'options' => [
+					'no-repeat' => esc_html__( 'No-repeat', 'mayuri-elementor-visits' ),
+					'repeat'    => esc_html__( 'Repeat', 'mayuri-elementor-visits' ),
+					'repeat-x'  => esc_html__( 'Repeat-x', 'mayuri-elementor-visits' ),
+					'repeat-y'  => esc_html__( 'Repeat-y', 'mayuri-elementor-visits' ),
+				],
+				'condition' => [
+					'background_image[url]!' => '',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'background_size',
+			[
+				'label'   => esc_html__( 'Display Size', 'mayuri-elementor-visits' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'cover',
+				'options' => [
+					'cover'   => esc_html__( 'Cover', 'mayuri-elementor-visits' ),
+					'contain' => esc_html__( 'Contain', 'mayuri-elementor-visits' ),
+					'auto'    => esc_html__( 'Auto', 'mayuri-elementor-visits' ),
+				],
+				'condition' => [
+					'background_image[url]!' => '',
+				],
+			]
+		);
+
+		$repeater->add_control(
 			'icon_image',
 			[
 				'label'   => esc_html__( 'Icon Image', 'mayuri-elementor-visits' ),
@@ -553,8 +627,22 @@ final class Services_Grid_Widget extends Widget_Base {
 			echo '<div class="' . esc_attr( $card_classes ) . '"' . $style . '>';
 
 			if ( $background_url ) {
-				echo '<div class="mev-card-bg-wrap">';
-				echo '<img src="' . esc_url( $background_url ) . '" alt="" loading="lazy" class="mev-card-bg-img">';
+				$bg_styles = [];
+				$bg_styles[] = 'background-image: url(' . esc_url( $background_url ) . ')';
+				
+				$bg_position = ! empty( $card['background_position'] ) ? $card['background_position'] : 'center center';
+				$bg_attachment = ! empty( $card['background_attachment'] ) ? $card['background_attachment'] : 'scroll';
+				$bg_repeat = ! empty( $card['background_repeat'] ) ? $card['background_repeat'] : 'no-repeat';
+				$bg_size = ! empty( $card['background_size'] ) ? $card['background_size'] : 'cover';
+
+				$bg_styles[] = 'background-position: ' . esc_attr( $bg_position );
+				$bg_styles[] = 'background-attachment: ' . esc_attr( $bg_attachment );
+				$bg_styles[] = 'background-repeat: ' . esc_attr( $bg_repeat );
+				$bg_styles[] = 'background-size: ' . esc_attr( $bg_size );
+
+				$bg_style_attr = ' style="' . esc_attr( implode( ';', $bg_styles ) ) . '"';
+
+				echo '<div class="mev-card-bg-wrap"' . $bg_style_attr . '>';
 				echo '<div class="mev-card-bg-overlay"></div>';
 				echo '</div>';
 			}
