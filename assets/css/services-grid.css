@@ -3,7 +3,7 @@
 	display: grid;
 	grid-template-columns: 1.1fr 1fr 1fr;
 	gap: 16px;
-	font-family: "Fraunces", Sans-serif;
+	box-sizing: border-box;
 }
 
 .mev-service-card {
@@ -12,15 +12,17 @@
 	--mev-overlay-end: rgba(27, 92, 19, .15);
 	position: relative;
 	overflow: hidden;
-	min-height: 245px;
+	min-height: 280px;
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	transition: all .35s ease;
+	transition: transform .35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow .35s ease;
+	border-radius: 0;
 }
 
 .mev-service-card:hover {
-	transform: translateY(-5px);
+	transform: translateY(-6px);
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .mev-service-card::before {
@@ -29,35 +31,108 @@
 	inset: 0;
 	z-index: 1;
 	background: linear-gradient(90deg, var(--mev-overlay-start) 0%, var(--mev-overlay-middle) 45%, var(--mev-overlay-end) 100%);
+	transition: opacity 0.3s ease;
 }
 
 .mev-service-card--large {
-	grid-row: span 2;
-	min-height: 510px;
-}
-
-.mev-service-card--large::before {
-	background: linear-gradient(90deg, var(--mev-overlay-start) 0%, var(--mev-overlay-middle) 45%, var(--mev-overlay-end) 100%);
+	min-height: 576px;
 }
 
 .mev-card-content {
 	position: relative;
 	z-index: 2;
 	height: 100%;
-	padding: 28px;
+	padding: 40px;
 	display: flex;
 	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
 	box-sizing: border-box;
 }
 
-.mev-service-card--large .mev-card-content {
-	justify-content: center;
+/* Titles */
+.mev-service-title {
+	margin: 0 0 14px 0;
+	font-family: "Fraunces", "Playfair Display", "Georgia", serif;
+	font-size: 28px;
+	line-height: 1.2;
+	font-weight: 600;
 }
 
+.mev-service-card--large .mev-service-title {
+	font-size: 34px;
+}
+
+/* Descriptions */
+.mev-service-description {
+	margin: 0 0 24px 0;
+	font-family: "Inter", "Outfit", "DM Sans", sans-serif;
+	font-size: 15px;
+	line-height: 1.6;
+	max-width: 380px;
+}
+
+/* Buttons / Links */
+.mev-explore-btn {
+	margin-top: auto; /* Pushes the button to the bottom of the card */
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	text-decoration: none;
+	font-family: "Inter", "Outfit", "DM Sans", sans-serif;
+	font-size: 15px;
+	font-weight: 500;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.mev-explore-btn span {
+	font-size: 16px;
+	transition: transform 0.2s ease;
+}
+
+.mev-explore-btn:hover span {
+	transform: translate(2px, -2px);
+}
+
+/* Color Schemes: Light Text (On Dark Backgrounds) */
+.mev-service-card--text-light .mev-service-title {
+	color: #ffffff;
+}
+
+.mev-service-card--text-light .mev-service-description {
+	color: rgba(255, 255, 255, 0.85);
+}
+
+.mev-service-card--text-light .mev-explore-btn {
+	color: #ffffff;
+}
+
+.mev-service-card--text-light .mev-explore-btn:hover {
+	opacity: 0.8;
+}
+
+/* Color Schemes: Dark Text (On Light Backgrounds) */
+.mev-service-card--text-dark .mev-service-title {
+	color: #1f1f1f;
+}
+
+.mev-service-card--text-dark .mev-service-description {
+	color: #555555;
+}
+
+.mev-service-card--text-dark .mev-explore-btn {
+	color: #466e3c;
+}
+
+.mev-service-card--text-dark .mev-explore-btn:hover {
+	color: #204d00;
+}
+
+/* Icon Wrap (if displayed in future) */
 .mev-top-row {
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	gap: 12px;
 	margin-bottom: 18px;
 }
 
@@ -66,7 +141,7 @@
 	height: 58px;
 	min-width: 58px;
 	border-radius: 50%;
-	background: #fff;
+	background: #ffffff;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -80,136 +155,114 @@
 	display: block;
 }
 
-.mev-service-title {
-	margin: 0;
-	font-size: 26px;
-	line-height: 1.1;
-	font-weight: 500;
-	color: #fff;
+/* Desktop Grid Layout Positioning (Exactly matching screenshot) */
+@media (min-width: 1025px) {
+	.mev-service-card:nth-child(1) {
+		grid-column: 1;
+		grid-row: 1 / span 2;
+	}
+	
+	.mev-service-card:nth-child(2) {
+		grid-column: 2 / span 2;
+		grid-row: 1;
+	}
+	
+	.mev-service-card:nth-child(3) {
+		grid-column: 2;
+		grid-row: 2;
+	}
+	
+	.mev-service-card:nth-child(4) {
+		grid-column: 3;
+		grid-row: 2;
+	}
+	
+	.mev-service-card:nth-child(5) {
+		grid-column: 1 / span 2;
+		grid-row: 3;
+	}
+	
+	.mev-service-card:nth-child(6) {
+		grid-column: 3;
+		grid-row: 3;
+	}
+	
+	.mev-service-card:nth-child(7) {
+		grid-column: 1 / span 2;
+		grid-row: 4;
+	}
+	
+	.mev-service-card:nth-child(8) {
+		grid-column: 3;
+		grid-row: 4;
+	}
 }
 
-.mev-service-card--large .mev-service-title {
-	color: #1f1f1f;
-}
-
-.mev-service-card--large > .mev-card-content > .mev-icon-wrap {
-	margin-bottom: 18px;
-}
-
-.mev-service-description {
-	margin: 0;
-	font-size: 18px;
-	line-height: 1.7;
-	color: rgba(255, 255, 255, .92);
-	max-width: 350px;
-}
-
-.mev-service-card--large .mev-service-description {
-	color: #555;
-}
-
-.mev-explore-btn {
-	margin-top: 22px;
-	display: inline-flex;
-	align-items: center;
-	gap: 10px;
-	text-decoration: none;
-	color: #fff;
-	font-size: 15px;
-	font-weight: 600;
-	letter-spacing: .5px;
-	align-self: flex-start;
-}
-
-.mev-service-card--large .mev-explore-btn {
-	color: #466e3c;
-}
-
-.mev-explore-btn:hover,
-.mev-explore-btn:focus {
-	opacity: .9;
-	color: inherit;
-}
-
-@media (max-width: 1024px) {
+/* Tablet Layout (2 columns, optimized with no blank spaces) */
+@media (max-width: 1024px) and (min-width: 768px) {
 	.mev-services-grid {
 		grid-template-columns: 1fr 1fr;
+		gap: 16px;
 	}
-
-	.mev-service-card--large {
-		grid-column: span 2;
+	
+	.mev-service-card {
+		grid-column: auto;
 		grid-row: auto;
+		min-height: 280px;
+	}
+	
+	.mev-service-card--large {
 		min-height: 420px;
 	}
-
-	.mev-service-title {
-		font-size: 28px;
+	
+	.mev-card-content {
+		padding: 32px;
 	}
-
-	.mev-service-description {
-		font-size: 16px;
-	}
+	
+	/* Grid placements and visual reordering to prevent holes */
+	.mev-service-card:nth-child(1) { grid-column: span 2; order: 1; }
+	.mev-service-card:nth-child(2) { grid-column: span 2; order: 2; }
+	.mev-service-card:nth-child(3) { grid-column: 1; order: 3; }
+	.mev-service-card:nth-child(4) { grid-column: 2; order: 4; }
+	.mev-service-card:nth-child(5) { grid-column: span 2; order: 5; }
+	.mev-service-card:nth-child(6) { grid-column: 1; order: 6; }
+	.mev-service-card:nth-child(8) { grid-column: 2; order: 7; }
+	.mev-service-card:nth-child(7) { grid-column: span 2; order: 8; }
 }
 
+/* Mobile Layout (1 column) */
 @media (max-width: 767px) {
 	.mev-services-grid {
 		grid-template-columns: 1fr;
-		gap: 15px;
-		padding: 15px;
+		gap: 16px;
+		padding: 0 10px;
 	}
-
+	
+	.mev-service-card {
+		min-height: 240px;
+		grid-column: auto !important;
+		grid-row: auto !important;
+		order: initial !important;
+	}
+	
 	.mev-service-card--large {
-		grid-column: auto;
 		min-height: 380px;
 	}
-
-	.mev-service-card {
-		min-height: 220px;
-	}
-
+	
 	.mev-card-content {
-		padding: 22px;
+		padding: 24px;
 	}
-
-	.mev-top-row {
-		gap: 12px;
-		margin-bottom: 15px;
-	}
-
-	.mev-icon-wrap {
-		width: 50px;
-		height: 50px;
-		min-width: 50px;
-	}
-
+	
 	.mev-service-title {
 		font-size: 24px;
 	}
-
-	.mev-service-description {
-		font-size: 15px;
-		line-height: 1.6;
+	
+	.mev-service-card--large .mev-service-title {
+		font-size: 28px;
 	}
-
-	.mev-explore-btn {
-		font-size: 16px;
-	}
-}
-
-@media (max-width: 480px) {
-	.mev-service-title {
-		font-size: 21px;
-	}
-
-	.mev-service-card {
-		min-height: 200px;
-	}
-
-	.mev-card-content {
-		padding: 18px;
-	}
-
+	
 	.mev-service-description {
 		font-size: 14px;
+		margin-bottom: 20px;
 	}
 }

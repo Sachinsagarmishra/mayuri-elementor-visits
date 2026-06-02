@@ -71,6 +71,19 @@ final class Services_Grid_Widget extends Widget_Base {
 		);
 
 		$repeater->add_control(
+			'text_theme',
+			[
+				'label'   => esc_html__( 'Text Color Scheme', 'mayuri-elementor-visits' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'light',
+				'options' => [
+					'light' => esc_html__( 'Light Text (on Dark Overlay)', 'mayuri-elementor-visits' ),
+					'dark'  => esc_html__( 'Dark Text (on Light Overlay)', 'mayuri-elementor-visits' ),
+				],
+			]
+		);
+
+		$repeater->add_control(
 			'title',
 			[
 				'label'       => esc_html__( 'Title', 'mayuri-elementor-visits' ),
@@ -530,8 +543,10 @@ final class Services_Grid_Widget extends Widget_Base {
 
 		foreach ( $cards as $index => $card ) {
 			$is_large       = isset( $card['card_type'] ) && 'large' === $card['card_type'];
+			$text_theme     = $card['text_theme'] ?? 'light';
 			$card_classes   = 'mev-service-card elementor-repeater-item-' . esc_attr( $card['_id'] ?? $index );
 			$card_classes  .= $is_large ? ' mev-service-card--large' : ' mev-service-card--standard';
+			$card_classes  .= ' mev-service-card--text-' . esc_attr( $text_theme );
 			$style          = $this->get_card_style( $card );
 
 			echo '<div class="' . esc_attr( $card_classes ) . '"' . $style . '>';
@@ -614,7 +629,7 @@ final class Services_Grid_Widget extends Widget_Base {
 		$rel = $rel_parts ? ' rel="' . esc_attr( implode( ' ', $rel_parts ) ) . '"' : '';
 
 		echo '<a href="' . esc_url( $url ) . '" class="mev-explore-btn"' . $target . $rel . '>';
-		echo esc_html( $button_text ) . ' <span aria-hidden="true">&rarr;</span>';
+		echo esc_html( $button_text ) . ' <span aria-hidden="true">&#8599;</span>';
 		echo '</a>';
 	}
 
@@ -649,104 +664,110 @@ final class Services_Grid_Widget extends Widget_Base {
 	}
 
 	private function get_default_cards() {
-		$icon = Utils::get_placeholder_image_src();
-
 		return [
 			[
 				'card_type'        => 'large',
-				'title'            => "International &\nSpecialty Foods",
-				'description'      => "A wide range of authentic\ningredients from South Asia\nand around the world.",
-				'button_text'      => 'EXPLORE',
+				'text_theme'       => 'dark',
+				'title'            => 'International & Specialty Foods',
+				'description'      => 'We are an Indian and Asian grocery store that stocks everything you need to prepare your favorite international dishes. Or grab-and-go a nutritious and delicious meal.',
+				'button_text'      => 'Learn more',
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => 'https://yellowgreen-newt-507420.hostingersite.com/wp-content/uploads/2026/06/international-specialty-foods.jpg' ],
-				'icon_image'       => [ 'url' => $icon ],
-				'overlay_start'    => 'rgba(255,250,245,.88)',
-				'overlay_middle'   => 'rgba(255,250,245,.88)',
-				'overlay_end'      => 'rgba(255,250,245,.88)',
+				'icon_image'       => [ 'url' => '' ],
+				'overlay_start'    => 'rgba(251, 248, 243, 0.88)',
+				'overlay_middle'   => 'rgba(251, 248, 243, 0.88)',
+				'overlay_end'      => 'rgba(251, 248, 243, 0.88)',
 			],
 			[
 				'card_type'        => 'standard',
+				'text_theme'       => 'light',
 				'title'            => 'Organic Produce',
-				'description'      => "Fresh, handpicked produce\nfor a healthier, happier\nyou and your family.",
-				'button_text'      => 'EXPLORE',
+				'description'      => 'Nourish your family with organic-certified local and imported fruits and vegetables. Shop in-store or order online for pickup or delivery.',
+				'button_text'      => 'Learn more',
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => 'https://yellowgreen-newt-507420.hostingersite.com/wp-content/uploads/2026/06/mango.jpg' ],
-				'icon_image'       => [ 'url' => $icon ],
-				'overlay_start'    => 'rgba(27,92,19,.95)',
-				'overlay_middle'   => 'rgba(27,92,19,.75)',
-				'overlay_end'      => 'rgba(27,92,19,.15)',
+				'icon_image'       => [ 'url' => '' ],
+				'overlay_start'    => 'rgba(27, 92, 19, 0.95)',
+				'overlay_middle'   => 'rgba(27, 92, 19, 0.75)',
+				'overlay_end'      => 'rgba(27, 92, 19, 0.15)',
 			],
 			[
 				'card_type'        => 'standard',
+				'text_theme'       => 'light',
 				'title'            => 'Bulk Spices',
-				'description'      => "Pure spices in every form\nand flavor, perfect for\nevery kitchen creation.",
-				'button_text'      => 'EXPLORE',
+				'description'      => 'Stock up on your favorite herbs and spices for curries, cooking, baking, and signature tea blends. Everything is fresh and organic.',
+				'button_text'      => 'Learn more',
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => 'https://yellowgreen-newt-507420.hostingersite.com/wp-content/uploads/2026/06/bulk-species.png' ],
-				'icon_image'       => [ 'url' => $icon ],
-				'overlay_start'    => 'rgba(214,102,40,.95)',
-				'overlay_middle'   => 'rgba(214,102,40,.75)',
-				'overlay_end'      => 'rgba(214,102,40,.15)',
+				'icon_image'       => [ 'url' => '' ],
+				'overlay_start'    => 'rgba(214, 102, 40, 0.95)',
+				'overlay_middle'   => 'rgba(214, 102, 40, 0.75)',
+				'overlay_end'      => 'rgba(214, 102, 40, 0.15)',
 			],
 			[
 				'card_type'        => 'standard',
+				'text_theme'       => 'light',
 				'title'            => 'Halal Butcher',
-				'description'      => "High-quality halal meat\nyou can trust, prepared\nwith care and hygiene.",
-				'button_text'      => 'EXPLORE',
+				'description'      => 'Halal-certified meats are free-range, hormone-free, antibiotic-free, vegetarian-fed, healthier, and tastier.',
+				'button_text'      => 'Learn more',
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => 'https://yellowgreen-newt-507420.hostingersite.com/wp-content/uploads/2026/06/halal.png' ],
-				'icon_image'       => [ 'url' => $icon ],
-				'overlay_start'    => 'rgba(201,39,39,.95)',
-				'overlay_middle'   => 'rgba(201,39,39,.75)',
-				'overlay_end'      => 'rgba(201,39,39,.15)',
+				'icon_image'       => [ 'url' => '' ],
+				'overlay_start'    => 'rgba(201, 39, 39, 0.95)',
+				'overlay_middle'   => 'rgba(201, 39, 39, 0.75)',
+				'overlay_end'      => 'rgba(201, 39, 39, 0.15)',
 			],
 			[
 				'card_type'        => 'standard',
-				'title'            => 'Bakery, Classics & Sweets',
-				'description'      => "Traditional favorites and\nfreshly baked delights for\nevery celebration.",
-				'button_text'      => 'EXPLORE',
+				'text_theme'       => 'dark',
+				'title'            => 'Bakery, Chaats, & Sweets',
+				'description'      => 'Traditional Indian, Indonesian, and Chinese sweets, savory chaats, quick snacks, and custom cakes for birthdays, weddings, and special events.',
+				'button_text'      => 'Learn more',
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => 'https://yellowgreen-newt-507420.hostingersite.com/wp-content/uploads/2026/06/bekary.jpg' ],
-				'icon_image'       => [ 'url' => $icon ],
-				'overlay_start'    => 'rgba(183,135,68,.95)',
-				'overlay_middle'   => 'rgba(183,135,68,.75)',
-				'overlay_end'      => 'rgba(183,135,68,.15)',
+				'icon_image'       => [ 'url' => '' ],
+				'overlay_start'    => 'rgba(251, 248, 243, 0.88)',
+				'overlay_middle'   => 'rgba(251, 248, 243, 0.88)',
+				'overlay_end'      => 'rgba(251, 248, 243, 0.88)',
 			],
 			[
 				'card_type'        => 'standard',
-				'title'            => 'Restaurant & Catering',
-				'description'      => "Delicious meals and catering\nservices for every occasion,\nbig or small.",
-				'button_text'      => 'EXPLORE',
+				'text_theme'       => 'light',
+				'title'            => 'Restaurants & Catering',
+				'description'      => 'Dine-in, pickup, delivery, and catering of traditional North and South Indian favorites. There\'s something for everyone—vegan, gluten-free, meat, and seafood.',
+				'button_text'      => 'Learn more',
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => 'https://yellowgreen-newt-507420.hostingersite.com/wp-content/uploads/2026/06/resturant.png' ],
-				'icon_image'       => [ 'url' => $icon ],
-				'overlay_start'    => 'rgba(0,96,102,.95)',
-				'overlay_middle'   => 'rgba(0,96,102,.75)',
-				'overlay_end'      => 'rgba(0,96,102,.15)',
+				'icon_image'       => [ 'url' => '' ],
+				'overlay_start'    => 'rgba(0, 96, 102, 0.95)',
+				'overlay_middle'   => 'rgba(0, 96, 102, 0.75)',
+				'overlay_end'      => 'rgba(0, 96, 102, 0.15)',
 			],
 			[
 				'card_type'        => 'standard',
+				'text_theme'       => 'dark',
 				'title'            => 'Floral Department',
-				'description'      => "Beautiful floral arrangements\nfor events, poojas and\nspecial moments.",
-				'button_text'      => 'EXPLORE',
+				'description'      => 'From standard bouquets and arrangements to custom garlands for weddings, poojas, and home and holiday décor made from local and Indian flowers.',
+				'button_text'      => 'Learn more',
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => 'https://yellowgreen-newt-507420.hostingersite.com/wp-content/uploads/2026/05/florals-PuejW0zk.jpg' ],
-				'icon_image'       => [ 'url' => $icon ],
-				'overlay_start'    => 'rgba(197,149,91,.95)',
-				'overlay_middle'   => 'rgba(197,149,91,.75)',
-				'overlay_end'      => 'rgba(197,149,91,.15)',
+				'icon_image'       => [ 'url' => '' ],
+				'overlay_start'    => 'rgba(251, 248, 243, 0.88)',
+				'overlay_middle'   => 'rgba(251, 248, 243, 0.88)',
+				'overlay_end'      => 'rgba(251, 248, 243, 0.88)',
 			],
 			[
 				'card_type'        => 'standard',
-				'title'            => 'Grab & Go!',
-				'description'      => "Fresh, delicious meals\nready for your quick,\nconvenient outing.",
-				'button_text'      => 'EXPLORE',
+				'text_theme'       => 'light',
+				'title'            => 'Come to us!',
+				'description'      => 'Everyone is welcome at Mayuri Foods—we hope to see you soon!',
+				'button_text'      => 'Contact Us',
 				'button_link'      => [ 'url' => '#' ],
-				'background_image' => [ 'url' => 'https://yellowgreen-newt-507420.hostingersite.com/wp-content/uploads/2026/06/grab-go.png' ],
-				'icon_image'       => [ 'url' => $icon ],
-				'overlay_start'    => 'rgba(48,85,20,.95)',
-				'overlay_middle'   => 'rgba(48,85,20,.75)',
-				'overlay_end'      => 'rgba(48,85,20,.15)',
+				'background_image' => [ 'url' => '' ],
+				'icon_image'       => [ 'url' => '' ],
+				'overlay_start'    => 'rgba(32, 77, 0, 0.95)',
+				'overlay_middle'   => 'rgba(32, 77, 0, 0.95)',
+				'overlay_end'      => 'rgba(32, 77, 0, 0.95)',
 			],
 		];
 	}
