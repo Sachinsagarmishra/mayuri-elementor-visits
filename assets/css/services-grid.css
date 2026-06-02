@@ -163,6 +163,44 @@
 }
 
 /* Desktop Grid Layout Positioning (Exactly matching provided HTML style-0) */
+/* Card Background and Wrap Styling - Global */
+.mev-service-card:nth-child(1) {
+	background: var(--mev-overlay-start, rgb(252, 251, 248));
+}
+.mev-service-card:nth-child(2) {
+	background: var(--mev-overlay-start, rgb(32, 77, 0));
+}
+.mev-service-card:nth-child(3) {
+	background: radial-gradient(at 0% 0%, rgb(248, 160, 84) 0%, rgb(249, 95, 6) 60%, rgb(179, 46, 26) 100%) repeat scroll 0% 0% / auto padding-box border-box !important;
+}
+.mev-service-card:nth-child(3) .mev-card-bg-wrap {
+	display: none !important;
+}
+.mev-service-card:nth-child(4) {
+	background: var(--mev-overlay-start, rgb(201, 52, 29));
+}
+.mev-service-card:nth-child(4) .mev-card-bg-wrap {
+	display: none !important;
+}
+.mev-service-card:nth-child(5) {
+	background: var(--mev-overlay-start, rgb(252, 251, 248));
+}
+.mev-service-card:nth-child(6) {
+	background: var(--mev-overlay-start, rgb(29, 114, 111));
+}
+.mev-service-card:nth-child(6) .mev-card-bg-wrap {
+	display: none !important;
+}
+.mev-service-card:nth-child(7) {
+	background: var(--mev-overlay-start, rgb(252, 251, 248));
+}
+.mev-service-card:nth-child(8) {
+	background: var(--mev-overlay-start, rgb(32, 77, 0));
+}
+.mev-service-card:nth-child(8) .mev-card-bg-wrap {
+	display: none !important;
+}
+
 @media (min-width: 1025px) {
 	.mev-services-grid {
 		grid-template-columns: repeat(4, 1fr);
@@ -173,61 +211,41 @@
 		grid-column: span 2;
 		grid-row: span 2;
 		min-height: 420px;
-		background: var(--mev-overlay-start, rgb(252, 251, 248));
 	}
 	
 	.mev-service-card:nth-child(2) {
 		grid-column: span 2;
 		min-height: 340px;
-		background: var(--mev-overlay-start, rgb(32, 77, 0));
 	}
 	
 	.mev-service-card:nth-child(3) {
 		grid-column: span 1;
 		min-height: 260px;
-		background: radial-gradient(at 0% 0%, rgb(248, 160, 84) 0%, rgb(249, 95, 6) 60%, rgb(179, 46, 26) 100%) repeat scroll 0% 0% / auto padding-box border-box !important;
-	}
-	.mev-service-card:nth-child(3) .mev-card-bg-wrap {
-		display: none !important;
 	}
 	
 	.mev-service-card:nth-child(4) {
 		grid-column: span 1;
 		min-height: 260px;
-		background: var(--mev-overlay-start, rgb(201, 52, 29));
-	}
-	.mev-service-card:nth-child(4) .mev-card-bg-wrap {
-		display: none !important;
 	}
 	
 	.mev-service-card:nth-child(5) {
 		grid-column: span 2;
 		min-height: 340px;
-		background: var(--mev-overlay-start, rgb(252, 251, 248));
 	}
 	
 	.mev-service-card:nth-child(6) {
 		grid-column: span 2;
 		min-height: 340px;
-		background: var(--mev-overlay-start, rgb(29, 114, 111));
-	}
-	.mev-service-card:nth-child(6) .mev-card-bg-wrap {
-		display: none !important;
 	}
 	
 	.mev-service-card:nth-child(7) {
 		grid-column: span 2;
 		min-height: 340px;
-		background: var(--mev-overlay-start, rgb(252, 251, 248));
 	}
 	
 	.mev-service-card:nth-child(8) {
 		grid-column: span 1;
 		min-height: 260px;
-		background: var(--mev-overlay-start, rgb(32, 77, 0));
-	}
-	.mev-service-card:nth-child(8) .mev-card-bg-wrap {
-		display: none !important;
 	}
 }
 
