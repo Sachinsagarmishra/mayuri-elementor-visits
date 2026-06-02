@@ -1,7 +1,7 @@
 .mev-services-grid {
 	padding: 20px 0;
 	display: grid;
-	grid-template-columns: 1.1fr 1fr 1fr;
+	grid-template-columns: 1.35fr 1fr 1fr;
 	gap: 16px;
 	box-sizing: border-box;
 }
@@ -128,7 +128,7 @@
 	color: #204d00;
 }
 
-/* Icon Wrap (if displayed in future) */
+/* Hide Icons - "icons kisi bhi box mein nhi hai ." */
 .mev-top-row {
 	display: flex;
 	align-items: center;
@@ -137,26 +137,49 @@
 }
 
 .mev-icon-wrap {
-	width: 58px;
-	height: 58px;
-	min-width: 58px;
-	border-radius: 50%;
-	background: #ffffff;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+	display: none !important;
 }
 
-.mev-icon-wrap img {
-	width: 26px;
-	height: 26px;
-	object-fit: contain;
-	display: block;
+/* Default Background Gradient Overrides (Customizable - deactivated if user defines overlay color inline in Elementor) */
+
+/* Card 3 (Bulk Spices) mango radial-gradient */
+.mev-service-card:nth-child(3):not([style*="--mev-overlay-start"]) {
+	background: radial-gradient(ellipse at top left, hsl(28 92% 65%) 0%, hsl(22 95% 50%) 60%, hsl(8 75% 40%) 100%) !important;
+}
+.mev-service-card:nth-child(3):not([style*="--mev-overlay-start"])::before {
+	display: none !important;
+}
+
+/* Card 4 (Halal Butcher) sindoor gradient */
+.mev-service-card:nth-child(4):not([style*="--mev-overlay-start"]) {
+	background: linear-gradient(135deg, hsl(8 75% 45%) 0%, #c9341d 100%) !important;
+}
+.mev-service-card:nth-child(4):not([style*="--mev-overlay-start"])::before {
+	display: none !important;
+}
+
+/* Card 6 (Restaurants & Catering) solid teal */
+.mev-service-card:nth-child(6):not([style*="--mev-overlay-start"]) {
+	background: hsl(178 60% 28%) !important;
+}
+.mev-service-card:nth-child(6):not([style*="--mev-overlay-start"])::before {
+	display: none !important;
+}
+
+/* Card 8 (Come to us) solid green */
+.mev-service-card:nth-child(8):not([style*="--mev-overlay-start"]) {
+	background: hsl(95 100% 15%) !important;
+}
+.mev-service-card:nth-child(8):not([style*="--mev-overlay-start"])::before {
+	display: none !important;
 }
 
 /* Desktop Grid Layout Positioning (Exactly matching screenshot) */
 @media (min-width: 1025px) {
+	.mev-services-grid {
+		grid-template-columns: 1.35fr 1fr 1fr;
+	}
+
 	.mev-service-card:nth-child(1) {
 		grid-column: 1;
 		grid-row: 1 / span 2;
