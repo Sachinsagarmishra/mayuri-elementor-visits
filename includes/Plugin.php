@@ -3,6 +3,7 @@ namespace MayuriElementorVisits;
 
 use MayuriElementorVisits\Elementor\Category;
 use MayuriElementorVisits\Elementor\Widgets\Services_Grid_Widget;
+use MayuriElementorVisits\Elementor\Widgets\Marquee_Widget;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -48,6 +49,13 @@ final class Plugin {
 			MEV_VERSION
 		);
 
+		wp_register_style(
+			'mev-elementor-visits-marquee',
+			MEV_URL . 'assets/css/marquee.css',
+			[],
+			MEV_VERSION
+		);
+
 		wp_register_script(
 			'mev-elementor-visits-frontend',
 			MEV_URL . 'assets/js/frontend.js',
@@ -65,6 +73,9 @@ final class Plugin {
 	public function register_widgets( $widgets_manager ) {
 		require_once MEV_PATH . 'widgets/Services_Grid_Widget.php';
 		$widgets_manager->register( new Services_Grid_Widget() );
+
+		require_once MEV_PATH . 'widgets/Marquee_Widget.php';
+		$widgets_manager->register( new Marquee_Widget() );
 	}
 
 	public function elementor_missing_notice() {

@@ -1,0 +1,66 @@
+.mev-marquee-wrapper {
+	--mev-marquee-bg: #204d00;
+	--mev-marquee-padding-top: 20px;
+	--mev-marquee-padding-bottom: 20px;
+	--mev-marquee-duration: 20s;
+	--mev-marquee-direction: normal;
+
+	width: 100%;
+	overflow: hidden;
+	background: var(--mev-marquee-bg);
+	padding-top: var(--mev-marquee-padding-top);
+	padding-bottom: var(--mev-marquee-padding-bottom);
+	box-sizing: border-box;
+}
+
+.mev-marquee {
+	display: flex;
+	width: max-content;
+	animation: mev-marquee-scroll var(--mev-marquee-duration, 20s) linear infinite;
+	animation-direction: var(--mev-marquee-direction, normal);
+}
+
+.mev-marquee-content {
+	--mev-marquee-gap: 40px;
+
+	display: flex;
+	align-items: center;
+	gap: var(--mev-marquee-gap);
+	padding-right: var(--mev-marquee-gap); /* Adds spacing between the two duplicate containers */
+	box-sizing: border-box;
+}
+
+.mev-marquee span {
+	--mev-marquee-color: #ffffff;
+	--mev-marquee-hover-color: #f95f06;
+	--mev-marquee-separator-color: #f95f06;
+	--mev-marquee-sep-spacing: 20px;
+
+	font-family: "Fraunces", sans-serif;
+	font-size: 42px;
+	font-weight: 700;
+	color: var(--mev-marquee-color);
+	white-space: nowrap;
+	transition: color 0.3s ease;
+	display: inline-flex;
+	align-items: center;
+}
+
+.mev-marquee span:hover {
+	color: var(--mev-marquee-hover-color);
+}
+
+.mev-marquee span::after {
+	content: var(--mev-marquee-separator, " ✦");
+	color: var(--mev-marquee-separator-color);
+	margin-left: var(--mev-marquee-sep-spacing);
+}
+
+@keyframes mev-marquee-scroll {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
+}
