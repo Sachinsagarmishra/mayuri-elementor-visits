@@ -58,12 +58,12 @@ final class Plugin {
 	}
 
 	public function register_categories( $elements_manager ) {
-		require_once MEV_PATH . 'includes/Elementor/Category.php';
+		require_once MEV_PATH . 'includes/Category.php';
 		Category::register( $elements_manager );
 	}
 
 	public function register_widgets( $widgets_manager ) {
-		require_once MEV_PATH . 'includes/Elementor/Widgets/Services_Grid_Widget.php';
+		require_once MEV_PATH . 'widgets/Services_Grid_Widget.php';
 		$widgets_manager->register( new Services_Grid_Widget() );
 	}
 
