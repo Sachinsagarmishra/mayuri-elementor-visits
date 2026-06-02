@@ -22,4 +22,4 @@ jobs:
           protocol: ftp
           port: 21
           local-dir: ./
-          server-dir: public_html/wp-content/plugins/mayuri-elementor-visits/
+          server-dir: wp-content/plugins/mayuri-elementor-visits/
