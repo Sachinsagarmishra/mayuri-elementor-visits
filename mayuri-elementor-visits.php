@@ -12,6 +12,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+// Trigger deploy retry.
 
 define( 'MEV_VERSION', '1.0.1' );
 define( 'MEV_FILE', __FILE__ );
