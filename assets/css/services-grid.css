@@ -1,131 +1,143 @@
 .mev-services-grid {
 	padding: 20px 0;
 	display: grid;
-	grid-template-columns: 1.35fr 1fr 1fr;
-	gap: 16px;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 20px;
 	box-sizing: border-box;
 }
 
 .mev-service-card {
-	--mev-overlay-start: rgba(27, 92, 19, .95);
-	--mev-overlay-middle: rgba(27, 92, 19, .75);
-	--mev-overlay-end: rgba(27, 92, 19, .15);
+	--mev-overlay-start: rgb(32, 77, 0);
+	--mev-overlay-middle: rgb(32, 77, 0);
+	--mev-overlay-end: rgb(32, 77, 0);
 	position: relative;
 	overflow: hidden;
-	min-height: 280px;
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	transition: transform .35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow .35s ease;
+	min-height: 260px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background: var(--mev-overlay-start);
+	border: 1px solid rgba(223, 218, 205, 0.6);
 	border-radius: 0;
+	text-decoration: none;
+	box-sizing: border-box;
+	animation-duration: 0.5s;
+	transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .mev-service-card:hover {
-	transform: translateY(-6px);
-	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+	transform: translateY(-5px);
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-.mev-service-card::before {
-	content: "";
+/* Background Image & Overlay Blending - exactly matching reference style */
+.mev-card-bg-wrap {
 	position: absolute;
 	inset: 0;
 	z-index: 1;
-	background: linear-gradient(90deg, var(--mev-overlay-start) 0%, var(--mev-overlay-middle) 45%, var(--mev-overlay-end) 100%);
-	transition: opacity 0.3s ease;
+	opacity: 0.3;
+	pointer-events: none;
+	animation-duration: 0.7s;
+	transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.mev-service-card--large {
-	min-height: 576px;
+.mev-card-bg-img {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.mev-card-bg-overlay {
+	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+	inset: 0px;
+	position: absolute;
 }
 
 .mev-card-content {
+	z-index: 10;
 	position: relative;
-	z-index: 2;
-	height: 100%;
-	padding: 40px;
+	padding: 36px;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: space-between;
 	align-items: flex-start;
+	height: 100%;
 	box-sizing: border-box;
+	flex-grow: 1;
 }
 
-/* Titles */
+/* Title Typography */
 .mev-service-title {
-	margin: 0 0 14px 0;
-	font-family: "Fraunces", "Playfair Display", "Georgia", serif;
-	font-size: 28px;
-	line-height: 1.2;
+	margin: 0;
+	font-family: "Fraunces", Georgia, serif;
+	font-size: 30px;
+	line-height: 36px;
 	font-weight: 600;
+	letter-spacing: -0.6px;
+	text-wrap: balance;
 }
 
-.mev-service-card--large .mev-service-title {
-	font-size: 34px;
-}
-
-/* Descriptions */
+/* Description Typography */
 .mev-service-description {
-	margin: 0 0 24px 0;
+	margin: 16px 0 0 0;
 	font-family: "Inter", "Outfit", "DM Sans", sans-serif;
-	font-size: 15px;
-	line-height: 1.6;
-	max-width: 380px;
+	font-size: 16px;
+	line-height: 24px;
+	opacity: 0.85;
+	max-width: 448px;
 }
 
-/* Buttons / Links */
+/* Button & Vector Arrow Link */
 .mev-explore-btn {
-	margin-top: auto; /* Pushes the button to the bottom of the card */
-	display: inline-flex;
+	margin-top: 24px;
+	display: flex;
 	align-items: center;
-	gap: 6px;
+	gap: 8px;
 	text-decoration: none;
 	font-family: "Inter", "Outfit", "DM Sans", sans-serif;
-	font-size: 15px;
 	font-weight: 500;
-	transition: opacity 0.2s ease, transform 0.2s ease;
+	font-size: 14px;
+	line-height: 20px;
+	transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.mev-explore-btn span {
-	font-size: 16px;
+.mev-explore-arrow {
 	transition: transform 0.2s ease;
 }
 
-.mev-explore-btn:hover span {
-	transform: translate(2px, -2px);
+.mev-explore-btn:hover .mev-explore-arrow {
+	transform: translate(3px, -3px);
 }
 
-/* Color Schemes: Light Text (On Dark Backgrounds) */
+/* Text Theme Colors - matching exact style requirements */
+
+/* Light Scheme (White Text) */
+.mev-service-card--text-light {
+	color: rgb(251, 249, 244);
+}
 .mev-service-card--text-light .mev-service-title {
-	color: #ffffff;
+	color: rgb(251, 249, 244);
 }
-
 .mev-service-card--text-light .mev-service-description {
-	color: rgba(255, 255, 255, 0.85);
+	color: rgba(251, 249, 244, 0.85);
 }
-
 .mev-service-card--text-light .mev-explore-btn {
-	color: #ffffff;
+	color: rgb(251, 249, 244);
 }
 
-.mev-service-card--text-light .mev-explore-btn:hover {
-	opacity: 0.8;
+/* Dark Scheme (Dark Text on Light Backgrounds) */
+.mev-service-card--text-dark {
+	color: rgb(8, 33, 16);
 }
-
-/* Color Schemes: Dark Text (On Light Backgrounds) */
 .mev-service-card--text-dark .mev-service-title {
-	color: #1f1f1f;
+	color: rgb(8, 33, 16);
 }
-
 .mev-service-card--text-dark .mev-service-description {
-	color: #555555;
+	color: rgba(8, 33, 16, 0.85);
 }
-
 .mev-service-card--text-dark .mev-explore-btn {
-	color: #466e3c;
-}
-
-.mev-service-card--text-dark .mev-explore-btn:hover {
-	color: #204d00;
+	color: rgb(8, 33, 16);
 }
 
 /* Hide Icons - "icons kisi bhi box mein nhi hai ." */
@@ -135,89 +147,76 @@
 	gap: 12px;
 	margin-bottom: 18px;
 }
-
 .mev-icon-wrap {
 	display: none !important;
 }
 
-/* Default Background Gradient Overrides (Customizable - deactivated if user defines overlay color inline in Elementor) */
-
-/* Card 3 (Bulk Spices) mango radial-gradient */
-.mev-service-card:nth-child(3):not([style*="--mev-overlay-start"]) {
-	background: radial-gradient(ellipse at top left, hsl(28 92% 65%) 0%, hsl(22 95% 50%) 60%, hsl(8 75% 40%) 100%) !important;
-}
-.mev-service-card:nth-child(3):not([style*="--mev-overlay-start"])::before {
-	display: none !important;
-}
-
-/* Card 4 (Halal Butcher) sindoor gradient */
-.mev-service-card:nth-child(4):not([style*="--mev-overlay-start"]) {
-	background: linear-gradient(135deg, hsl(8 75% 45%) 0%, #c9341d 100%) !important;
-}
-.mev-service-card:nth-child(4):not([style*="--mev-overlay-start"])::before {
-	display: none !important;
-}
-
-/* Card 6 (Restaurants & Catering) solid teal */
-.mev-service-card:nth-child(6):not([style*="--mev-overlay-start"]) {
-	background: hsl(178 60% 28%) !important;
-}
-.mev-service-card:nth-child(6):not([style*="--mev-overlay-start"])::before {
-	display: none !important;
-}
-
-/* Card 8 (Come to us) solid green */
-.mev-service-card:nth-child(8):not([style*="--mev-overlay-start"]) {
-	background: hsl(95 100% 15%) !important;
-}
-.mev-service-card:nth-child(8):not([style*="--mev-overlay-start"])::before {
-	display: none !important;
-}
-
-/* Desktop Grid Layout Positioning (Exactly matching screenshot) */
+/* Desktop Grid Layout Positioning (Exactly matching provided HTML style-0) */
 @media (min-width: 1025px) {
 	.mev-services-grid {
-		grid-template-columns: 1.35fr 1fr 1fr;
+		grid-template-columns: repeat(4, 1fr);
+		grid-auto-rows: minmax(180px, auto);
 	}
 
 	.mev-service-card:nth-child(1) {
-		grid-column: 1;
-		grid-row: 1 / span 2;
+		grid-column: span 2;
+		grid-row: span 2;
+		min-height: 420px;
+		background: var(--mev-overlay-start, rgb(252, 251, 248));
 	}
 	
 	.mev-service-card:nth-child(2) {
-		grid-column: 2 / span 2;
-		grid-row: 1;
+		grid-column: span 2;
+		min-height: 340px;
+		background: var(--mev-overlay-start, rgb(32, 77, 0));
 	}
 	
 	.mev-service-card:nth-child(3) {
-		grid-column: 2;
-		grid-row: 2;
+		grid-column: span 1;
+		min-height: 260px;
+		background: radial-gradient(at 0% 0%, rgb(248, 160, 84) 0%, rgb(249, 95, 6) 60%, rgb(179, 46, 26) 100%) repeat scroll 0% 0% / auto padding-box border-box !important;
+	}
+	.mev-service-card:nth-child(3) .mev-card-bg-wrap {
+		display: none !important;
 	}
 	
 	.mev-service-card:nth-child(4) {
-		grid-column: 3;
-		grid-row: 2;
+		grid-column: span 1;
+		min-height: 260px;
+		background: var(--mev-overlay-start, rgb(201, 52, 29));
+	}
+	.mev-service-card:nth-child(4) .mev-card-bg-wrap {
+		display: none !important;
 	}
 	
 	.mev-service-card:nth-child(5) {
-		grid-column: 1 / span 2;
-		grid-row: 3;
+		grid-column: span 2;
+		min-height: 340px;
+		background: var(--mev-overlay-start, rgb(252, 251, 248));
 	}
 	
 	.mev-service-card:nth-child(6) {
-		grid-column: 3;
-		grid-row: 3;
+		grid-column: span 2;
+		min-height: 340px;
+		background: var(--mev-overlay-start, rgb(29, 114, 111));
+	}
+	.mev-service-card:nth-child(6) .mev-card-bg-wrap {
+		display: none !important;
 	}
 	
 	.mev-service-card:nth-child(7) {
-		grid-column: 1 / span 2;
-		grid-row: 4;
+		grid-column: span 2;
+		min-height: 340px;
+		background: var(--mev-overlay-start, rgb(252, 251, 248));
 	}
 	
 	.mev-service-card:nth-child(8) {
-		grid-column: 3;
-		grid-row: 4;
+		grid-column: span 1;
+		min-height: 260px;
+		background: var(--mev-overlay-start, rgb(32, 77, 0));
+	}
+	.mev-service-card:nth-child(8) .mev-card-bg-wrap {
+		display: none !important;
 	}
 }
 
@@ -225,7 +224,7 @@
 @media (max-width: 1024px) and (min-width: 768px) {
 	.mev-services-grid {
 		grid-template-columns: 1fr 1fr;
-		gap: 16px;
+		gap: 20px;
 	}
 	
 	.mev-service-card {
@@ -235,7 +234,7 @@
 	}
 	
 	.mev-service-card--large {
-		min-height: 420px;
+		min-height: 380px;
 	}
 	
 	.mev-card-content {
@@ -245,11 +244,11 @@
 	/* Grid placements and visual reordering to prevent holes */
 	.mev-service-card:nth-child(1) { grid-column: span 2; order: 1; }
 	.mev-service-card:nth-child(2) { grid-column: span 2; order: 2; }
-	.mev-service-card:nth-child(3) { grid-column: 1; order: 3; }
-	.mev-service-card:nth-child(4) { grid-column: 2; order: 4; }
+	.mev-service-card:nth-child(3) { grid-column: span 1; order: 3; }
+	.mev-service-card:nth-child(4) { grid-column: span 1; order: 4; }
 	.mev-service-card:nth-child(5) { grid-column: span 2; order: 5; }
-	.mev-service-card:nth-child(6) { grid-column: 1; order: 6; }
-	.mev-service-card:nth-child(8) { grid-column: 2; order: 7; }
+	.mev-service-card:nth-child(6) { grid-column: span 1; order: 6; }
+	.mev-service-card:nth-child(8) { grid-column: span 1; order: 7; }
 	.mev-service-card:nth-child(7) { grid-column: span 2; order: 8; }
 }
 
@@ -269,7 +268,7 @@
 	}
 	
 	.mev-service-card--large {
-		min-height: 380px;
+		min-height: 340px;
 	}
 	
 	.mev-card-content {
@@ -278,14 +277,12 @@
 	
 	.mev-service-title {
 		font-size: 24px;
-	}
-	
-	.mev-service-card--large .mev-service-title {
-		font-size: 28px;
+		line-height: 30px;
 	}
 	
 	.mev-service-description {
 		font-size: 14px;
-		margin-bottom: 20px;
+		line-height: 20px;
+		margin-top: 12px;
 	}
 }

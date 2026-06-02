@@ -548,8 +548,17 @@ final class Services_Grid_Widget extends Widget_Base {
 			$card_classes  .= $is_large ? ' mev-service-card--large' : ' mev-service-card--standard';
 			$card_classes  .= ' mev-service-card--text-' . esc_attr( $text_theme );
 			$style          = $this->get_card_style( $card );
+			$background_url = $card['background_image']['url'] ?? '';
 
 			echo '<div class="' . esc_attr( $card_classes ) . '"' . $style . '>';
+
+			if ( $background_url ) {
+				echo '<div class="mev-card-bg-wrap">';
+				echo '<img src="' . esc_url( $background_url ) . '" alt="" loading="lazy" class="mev-card-bg-img">';
+				echo '<div class="mev-card-bg-overlay"></div>';
+				echo '</div>';
+			}
+
 			echo '<div class="mev-card-content">';
 
 			if ( $is_large ) {
@@ -629,17 +638,16 @@ final class Services_Grid_Widget extends Widget_Base {
 		$rel = $rel_parts ? ' rel="' . esc_attr( implode( ' ', $rel_parts ) ) . '"' : '';
 
 		echo '<a href="' . esc_url( $url ) . '" class="mev-explore-btn"' . $target . $rel . '>';
-		echo esc_html( $button_text ) . ' <span aria-hidden="true">&#8599;</span>';
+		echo '<span class="mev-explore-text">' . esc_html( $button_text ) . '</span>';
+		echo '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mev-explore-arrow">';
+		echo '<path d="M7 7h10v10"></path>';
+		echo '<path d="M7 17 17 7"></path>';
+		echo '</svg>';
 		echo '</a>';
 	}
 
 	private function get_card_style( $card ) {
 		$styles         = [];
-		$background_url = $card['background_image']['url'] ?? '';
-
-		if ( $background_url ) {
-			$styles[] = 'background-image:url(' . esc_url( $background_url ) . ')';
-		}
 
 		foreach ( [ 'overlay_start', 'overlay_middle', 'overlay_end' ] as $setting_name ) {
 			if ( empty( $card[ $setting_name ] ) ) {
@@ -674,9 +682,9 @@ final class Services_Grid_Widget extends Widget_Base {
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => 'https://yellowgreen-newt-507420.hostingersite.com/wp-content/uploads/2026/06/international-specialty-foods.jpg' ],
 				'icon_image'       => [ 'url' => '' ],
-				'overlay_start'    => 'rgba(251, 248, 243, 0.88)',
-				'overlay_middle'   => 'rgba(251, 248, 243, 0.88)',
-				'overlay_end'      => 'rgba(251, 248, 243, 0.88)',
+				'overlay_start'    => 'rgb(252, 251, 248)',
+				'overlay_middle'   => 'rgb(252, 251, 248)',
+				'overlay_end'      => 'rgb(252, 251, 248)',
 			],
 			[
 				'card_type'        => 'standard',
@@ -687,9 +695,9 @@ final class Services_Grid_Widget extends Widget_Base {
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => 'https://yellowgreen-newt-507420.hostingersite.com/wp-content/uploads/2026/06/mango.jpg' ],
 				'icon_image'       => [ 'url' => '' ],
-				'overlay_start'    => 'rgba(27, 92, 19, 0.95)',
-				'overlay_middle'   => 'rgba(27, 92, 19, 0.75)',
-				'overlay_end'      => 'rgba(27, 92, 19, 0.15)',
+				'overlay_start'    => 'rgb(32, 77, 0)',
+				'overlay_middle'   => 'rgb(32, 77, 0)',
+				'overlay_end'      => 'rgb(32, 77, 0)',
 			],
 			[
 				'card_type'        => 'standard',
@@ -713,9 +721,9 @@ final class Services_Grid_Widget extends Widget_Base {
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => '' ],
 				'icon_image'       => [ 'url' => '' ],
-				'overlay_start'    => '',
-				'overlay_middle'   => '',
-				'overlay_end'      => '',
+				'overlay_start'    => 'rgb(201, 52, 29)',
+				'overlay_middle'   => 'rgb(201, 52, 29)',
+				'overlay_end'      => 'rgb(201, 52, 29)',
 			],
 			[
 				'card_type'        => 'standard',
@@ -726,9 +734,9 @@ final class Services_Grid_Widget extends Widget_Base {
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => 'https://yellowgreen-newt-507420.hostingersite.com/wp-content/uploads/2026/06/bekary.jpg' ],
 				'icon_image'       => [ 'url' => '' ],
-				'overlay_start'    => 'rgba(251, 248, 243, 0.88)',
-				'overlay_middle'   => 'rgba(251, 248, 243, 0.88)',
-				'overlay_end'      => 'rgba(251, 248, 243, 0.88)',
+				'overlay_start'    => 'rgb(252, 251, 248)',
+				'overlay_middle'   => 'rgb(252, 251, 248)',
+				'overlay_end'      => 'rgb(252, 251, 248)',
 			],
 			[
 				'card_type'        => 'standard',
@@ -739,9 +747,9 @@ final class Services_Grid_Widget extends Widget_Base {
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => '' ],
 				'icon_image'       => [ 'url' => '' ],
-				'overlay_start'    => '',
-				'overlay_middle'   => '',
-				'overlay_end'      => '',
+				'overlay_start'    => 'rgb(29, 114, 111)',
+				'overlay_middle'   => 'rgb(29, 114, 111)',
+				'overlay_end'      => 'rgb(29, 114, 111)',
 			],
 			[
 				'card_type'        => 'standard',
@@ -752,9 +760,9 @@ final class Services_Grid_Widget extends Widget_Base {
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => 'https://yellowgreen-newt-507420.hostingersite.com/wp-content/uploads/2026/05/florals-PuejW0zk.jpg' ],
 				'icon_image'       => [ 'url' => '' ],
-				'overlay_start'    => 'rgba(251, 248, 243, 0.88)',
-				'overlay_middle'   => 'rgba(251, 248, 243, 0.88)',
-				'overlay_end'      => 'rgba(251, 248, 243, 0.88)',
+				'overlay_start'    => 'rgb(252, 251, 248)',
+				'overlay_middle'   => 'rgb(252, 251, 248)',
+				'overlay_end'      => 'rgb(252, 251, 248)',
 			],
 			[
 				'card_type'        => 'standard',
@@ -765,9 +773,9 @@ final class Services_Grid_Widget extends Widget_Base {
 				'button_link'      => [ 'url' => '#' ],
 				'background_image' => [ 'url' => '' ],
 				'icon_image'       => [ 'url' => '' ],
-				'overlay_start'    => '',
-				'overlay_middle'   => '',
-				'overlay_end'      => '',
+				'overlay_start'    => 'rgb(32, 77, 0)',
+				'overlay_middle'   => 'rgb(32, 77, 0)',
+				'overlay_end'      => 'rgb(32, 77, 0)',
 			],
 		];
 	}
