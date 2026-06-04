@@ -4,6 +4,7 @@ namespace MayuriElementorVisits;
 use MayuriElementorVisits\Elementor\Category;
 use MayuriElementorVisits\Elementor\Widgets\Services_Grid_Widget;
 use MayuriElementorVisits\Elementor\Widgets\Marquee_Widget;
+use MayuriElementorVisits\Elementor\Widgets\Testimonials_Widget;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -56,10 +57,17 @@ final class Plugin {
 			MEV_VERSION
 		);
 
+		wp_register_style(
+			'mev-elementor-visits-testimonials',
+			MEV_URL . 'assets/css/testimonials.css',
+			[],
+			MEV_VERSION
+		);
+
 		wp_register_script(
 			'mev-elementor-visits-frontend',
 			MEV_URL . 'assets/js/frontend.js',
-			[],
+			[ 'jquery' ],
 			MEV_VERSION,
 			true
 		);
@@ -76,6 +84,9 @@ final class Plugin {
 
 		require_once MEV_PATH . 'widgets/Marquee_Widget.php';
 		$widgets_manager->register( new Marquee_Widget() );
+
+		require_once MEV_PATH . 'widgets/Testimonials_Widget.php';
+		$widgets_manager->register( new Testimonials_Widget() );
 	}
 
 	public function elementor_missing_notice() {
