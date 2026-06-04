@@ -1,9 +1,19 @@
 (function ($) {
 	'use strict';
 
-	var TestimonialSliderHandler = function ($element) {
-		var $wrapper = $element.find('.mev-testimonial-section');
+	var TestimonialSliderHandler = function ($wrapper) {
+		// If $wrapper is the Elementor scope ($element), find the actual section wrapper inside it
+		if ($wrapper.hasClass('elementor-widget-mev_testimonials_visit')) {
+			$wrapper = $wrapper.find('.mev-testimonial-section');
+		}
+		
 		if (!$wrapper.length) return;
+
+		// Prevent double initialization
+		if ($wrapper.data('mev-slider-initialized')) {
+			return;
+		}
+		$wrapper.data('mev-slider-initialized', true);
 
 		var $track = $wrapper.find('.mev-testimonial-slides-track');
 		var $slides = $wrapper.find('.mev-testimonial-slide');
@@ -11,10 +21,10 @@
 		
 		if ($slides.length <= 1) return;
 
-		var autoplay = $wrapper.data('autoplay') === true;
-		var autoplaySpeed = parseInt($wrapper.data('autoplay-speed'), 10) || 5000;
-		var transitionSpeed = parseInt($wrapper.data('transition-speed'), 10) || 500;
-		var pauseOnHover = $wrapper.data('pause-on-hover') === true;
+		var autoplay = $wrapper.attr('data-autoplay') === 'true' || $wrapper.data('autoplay') === true || $wrapper.data('autoplay') === 'true';
+		var autoplaySpeed = parseInt($wrapper.attr('data-autoplay-speed') || $wrapper.data('autoplay-speed'), 10) || 5000;
+		var transitionSpeed = parseInt($wrapper.attr('data-transition-speed') || $wrapper.data('transition-speed'), 10) || 500;
+		var pauseOnHover = $wrapper.attr('data-pause-on-hover') === 'true' || $wrapper.data('pause-on-hover') === true || $wrapper.data('pause-on-hover') === 'true';
 
 		var currentIndex = 0;
 		var intervalId = null;
@@ -80,7 +90,17 @@
 		}
 	};
 
+	// Run on document ready for static rendering fallback
+	$(document).ready(function () {
+		$('.mev-testimonial-section').each(function () {
+			TestimonialSliderHandler($(this));
+		});
+	});
+
+	// Register with Elementor Frontend
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.hooks.addAction('frontend/element_ready/mev_testimonials_visit.default', TestimonialSliderHandler);
+		elementorFrontend.hooks.addAction('frontend/element_ready/mev_testimonials_visit.default', function ($scope) {
+			TestimonialSliderHandler($scope);
+		});
 	});
 })(jQuery);
