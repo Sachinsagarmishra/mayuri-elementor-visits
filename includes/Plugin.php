@@ -71,6 +71,10 @@ final class Plugin {
 			MEV_VERSION,
 			true
 		);
+
+		// Enqueue assets to guarantee loading in all contexts (frontend & elementor editor)
+		wp_enqueue_style( 'mev-elementor-visits-testimonials' );
+		wp_enqueue_script( 'mev-elementor-visits-frontend' );
 	}
 
 	public function register_categories( $elements_manager ) {

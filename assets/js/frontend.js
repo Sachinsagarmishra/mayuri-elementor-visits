@@ -1,16 +1,23 @@
 (function ($) {
 	'use strict';
 
-	var TestimonialSliderHandler = function ($wrapper) {
-		// If $wrapper is the Elementor scope ($element), find the actual section wrapper inside it
-		if ($wrapper.hasClass('elementor-widget-mev_testimonials_visit')) {
-			$wrapper = $wrapper.find('.mev-testimonial-section');
-		}
+	console.log("MEV Frontend JS file loaded.");
+
+	var TestimonialSliderHandler = function ($element) {
+		console.log("MEV Testimonial Slider Handler triggered.");
 		
-		if (!$wrapper.length) return;
+		var $wrapper = $element.find('.mev-testimonial-section');
+		if (!$wrapper.length) {
+			$wrapper = $element.hasClass('mev-testimonial-section') ? $element : $element.closest('.mev-testimonial-section');
+		}
+		if (!$wrapper.length) {
+			console.log("MEV Testimonial wrapper not found.");
+			return;
+		}
 
 		// Prevent double initialization
 		if ($wrapper.data('mev-slider-initialized')) {
+			console.log("MEV Slider already initialized on this element.");
 			return;
 		}
 		$wrapper.data('mev-slider-initialized', true);
@@ -19,12 +26,16 @@
 		var $slides = $wrapper.find('.mev-testimonial-slide');
 		var $dots = $wrapper.find('.mev-slider-dot');
 		
+		console.log("MEV Slider Elements found:", $slides.length, "slides,", $dots.length, "dots.");
+
 		if ($slides.length <= 1) return;
 
 		var autoplay = $wrapper.attr('data-autoplay') === 'true' || $wrapper.data('autoplay') === true || $wrapper.data('autoplay') === 'true';
 		var autoplaySpeed = parseInt($wrapper.attr('data-autoplay-speed') || $wrapper.data('autoplay-speed'), 10) || 5000;
 		var transitionSpeed = parseInt($wrapper.attr('data-transition-speed') || $wrapper.data('transition-speed'), 10) || 500;
 		var pauseOnHover = $wrapper.attr('data-pause-on-hover') === 'true' || $wrapper.data('pause-on-hover') === true || $wrapper.data('pause-on-hover') === 'true';
+
+		console.log("MEV Settings:", { autoplay: autoplay, autoplaySpeed: autoplaySpeed, transitionSpeed: transitionSpeed, pauseOnHover: pauseOnHover });
 
 		var currentIndex = 0;
 		var intervalId = null;
@@ -40,6 +51,8 @@
 				index = 0;
 			}
 			currentIndex = index;
+
+			console.log("MEV Sliding to index:", currentIndex);
 
 			// Slide transition
 			$track.css('transform', 'translateX(-' + (currentIndex * 100) + '%)');
@@ -92,6 +105,7 @@
 
 	// Run on document ready for static rendering fallback
 	$(document).ready(function () {
+		console.log("MEV Document Ready: Initializing sliders.");
 		$('.mev-testimonial-section').each(function () {
 			TestimonialSliderHandler($(this));
 		});
@@ -99,6 +113,7 @@
 
 	// Register with Elementor Frontend
 	$(window).on('elementor/frontend/init', function () {
+		console.log("MEV Elementor Frontend Init: Registering hooks.");
 		elementorFrontend.hooks.addAction('frontend/element_ready/mev_testimonials_visit.default', function ($scope) {
 			TestimonialSliderHandler($scope);
 		});
