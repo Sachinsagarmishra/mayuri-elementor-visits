@@ -5,6 +5,7 @@ use MayuriElementorVisits\Elementor\Category;
 use MayuriElementorVisits\Elementor\Widgets\Services_Grid_Widget;
 use MayuriElementorVisits\Elementor\Widgets\Marquee_Widget;
 use MayuriElementorVisits\Elementor\Widgets\Testimonials_Widget;
+use MayuriElementorVisits\Elementor\Widgets\Locations_Widget;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -66,6 +67,13 @@ final class Plugin {
 			MEV_VERSION
 		);
 
+		wp_register_style(
+			'mev-elementor-visits-locations',
+			MEV_URL . 'assets/css/locations.css',
+			[],
+			MEV_VERSION
+		);
+
 		wp_register_script(
 			'mev-elementor-visits-frontend',
 			MEV_URL . 'assets/js/frontend.js',
@@ -77,6 +85,7 @@ final class Plugin {
 
 	public function enqueue_frontend_assets() {
 		wp_enqueue_style( 'mev-elementor-visits-testimonials' );
+		wp_enqueue_style( 'mev-elementor-visits-locations' );
 		wp_enqueue_script( 'mev-elementor-visits-frontend' );
 	}
 
@@ -94,6 +103,9 @@ final class Plugin {
 
 		require_once MEV_PATH . 'widgets/Testimonials_Widget.php';
 		$widgets_manager->register( new Testimonials_Widget() );
+
+		require_once MEV_PATH . 'widgets/Locations_Widget.php';
+		$widgets_manager->register( new Locations_Widget() );
 	}
 
 	public function elementor_missing_notice() {

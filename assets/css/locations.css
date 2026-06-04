@@ -1,0 +1,180 @@
+.mev-locations-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 20px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.mev-location-card {
+	background-color: rgb(20, 20, 20);
+	overflow: hidden;
+	position: relative;
+	text-decoration: none;
+	display: block;
+	box-sizing: border-box;
+	border: 0px solid rgb(229, 226, 220);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mev-location-card-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	position: absolute;
+	inset: 0px;
+	border: 0px;
+	max-width: 100%;
+	display: block;
+	vertical-align: middle;
+	box-sizing: border-box;
+	transform: scale(1);
+	transition: transform 0.4s cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Hover Zoom Animation */
+.mev-location-card--zoom-enabled:hover .mev-location-card-image {
+	transform: scale(1.05);
+}
+
+.mev-location-card-overlay {
+	--mev-overlay-start: rgba(20, 20, 20, 0.8);
+	--mev-overlay-mid: rgba(20, 20, 20, 0.2);
+	--mev-overlay-end: rgba(0, 0, 0, 0);
+
+	background-image: linear-gradient(to top, var(--mev-overlay-start), var(--mev-overlay-mid), var(--mev-overlay-end));
+	position: absolute;
+	inset: 0px;
+	box-sizing: border-box;
+	border: 0px;
+	z-index: 2;
+}
+
+.mev-location-card-content {
+	padding: 28px;
+	color: rgb(252, 251, 248);
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 3;
+	box-sizing: border-box;
+	border: 0px;
+	text-align: left;
+}
+
+.mev-location-card-label {
+	color: rgba(252, 251, 248, 0.7);
+	letter-spacing: 2.75px;
+	text-transform: uppercase;
+	font-size: 11px;
+	font-weight: 500;
+	gap: 8px;
+	align-items: center;
+	display: flex;
+	margin: 0px 0px 8px;
+	box-sizing: border-box;
+	border: 0px;
+	font-family: 'Inter', sans-serif;
+}
+
+.mev-location-card-label svg {
+	width: 12px;
+	height: 12px;
+	display: block;
+	vertical-align: middle;
+	box-sizing: border-box;
+	border: 0px;
+}
+
+.mev-location-card-title {
+	font-size: 30px;
+	line-height: 36px;
+	font-family: Fraunces, Georgia, serif;
+	color: rgb(252, 251, 248);
+	font-weight: 400;
+	letter-spacing: -0.45px;
+	margin: 0px;
+	box-sizing: border-box;
+	border: 0px;
+}
+
+.mev-location-card-address {
+	color: rgba(252, 251, 248, 0.8);
+	font-size: 14px;
+	line-height: 20px;
+	margin: 4px 0px 0px;
+	box-sizing: border-box;
+	border: 0px;
+	font-family: 'Inter', sans-serif;
+}
+
+/* Card size rules on desktop */
+@media (min-width: 1025px) {
+	.mev-location-card--large {
+		grid-row: span 2;
+		grid-column: span 2;
+		height: 474px;
+		aspect-ratio: auto;
+	}
+
+	.mev-location-card--standard {
+		aspect-ratio: 4 / 3;
+	}
+
+	.mev-location-card--wide {
+		grid-column: span 2;
+		aspect-ratio: 16 / 9;
+	}
+}
+
+/* Tablet Layout (2 Columns) */
+@media (max-width: 1024px) and (min-width: 768px) {
+	.mev-locations-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 20px;
+	}
+
+	.mev-location-card--large {
+		grid-column: span 2;
+		grid-row: span 2;
+		min-height: 380px;
+	}
+
+	.mev-location-card--standard {
+		aspect-ratio: 4 / 3;
+	}
+
+	.mev-location-card--wide {
+		grid-column: span 2;
+		aspect-ratio: 16 / 9;
+	}
+}
+
+/* Mobile Layout (1 Column) */
+@media (max-width: 767px) {
+	.mev-locations-grid {
+		grid-template-columns: 1fr;
+		gap: 16px;
+	}
+
+	.mev-location-card {
+		grid-column: span 1 !important;
+		grid-row: span 1 !important;
+		aspect-ratio: auto !important;
+		min-height: 240px;
+	}
+
+	.mev-location-card--large {
+		min-height: 320px;
+	}
+
+	.mev-location-card-content {
+		padding: 20px;
+	}
+
+	.mev-location-card-title {
+		font-size: 24px;
+		line-height: 30px;
+	}
+}
