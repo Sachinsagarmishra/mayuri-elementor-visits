@@ -24,6 +24,7 @@ final class Plugin {
 	private function __construct() {
 		add_action( 'init', [ $this, 'load_textdomain' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_frontend_assets' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_assets' ] );
 		add_action( 'plugins_loaded', [ $this, 'init' ] );
 	}
 
@@ -36,6 +37,7 @@ final class Plugin {
 		add_action( 'elementor/elements/categories_registered', [ $this, 'register_categories' ] );
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
 		add_action( 'elementor/frontend/after_register_styles', [ $this, 'register_frontend_assets' ] );
+		add_action( 'elementor/frontend/after_enqueue_scripts', [ $this, 'enqueue_frontend_assets' ] );
 	}
 
 	public function load_textdomain() {
@@ -71,8 +73,9 @@ final class Plugin {
 			MEV_VERSION,
 			true
 		);
+	}
 
-		// Enqueue assets to guarantee loading in all contexts (frontend & elementor editor)
+	public function enqueue_frontend_assets() {
 		wp_enqueue_style( 'mev-elementor-visits-testimonials' );
 		wp_enqueue_script( 'mev-elementor-visits-frontend' );
 	}

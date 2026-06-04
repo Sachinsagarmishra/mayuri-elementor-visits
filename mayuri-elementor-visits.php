@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Mayuri Elementor Visits
  * Description: Adds unique, editable Elementor visit widgets for Mayuri sections.
- * Version: 1.0.5
+ * Version: 1.0.6
  * Author: Mayuri
  * Text Domain: mayuri-elementor-visits
  * Requires PHP: 7.4
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 // Trigger deploy retry.
 
-define( 'MEV_VERSION', '1.0.5' );
+define( 'MEV_VERSION', '1.0.6' );
 define( 'MEV_FILE', __FILE__ );
 define( 'MEV_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MEV_URL', plugin_dir_url( __FILE__ ) );
