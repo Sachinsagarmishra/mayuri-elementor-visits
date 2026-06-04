@@ -12,7 +12,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-// Trigger deploy retry after FTP lockout cool-down 2.
+// Trigger deploy retry after FTP lockout cool-down 3.
 
 define( 'MEV_VERSION', '1.0.7' );
 define( 'MEV_FILE', __FILE__ );
